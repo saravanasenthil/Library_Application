@@ -1,0 +1,57 @@
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    outline: none;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 999;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th, .user-table td {
+    padding: 10px;
+    border: 1px solid #9d9d9d;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #f0f0f0;
+}
+
+.close-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+    background-color: #c82333;
+}

@@ -1,0 +1,101 @@
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    outline: none;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+}
+
+.relation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.relation-table button{
+    background-color: #206208;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 5px;
+}
+
+.relation-table button:hover{
+    background-color: #41aa41;
+}
+
+.relation-table th, .relation-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.relation-table th {
+    background-color: #f0f0f0;
+}
+
+.relation-table button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.relation-table .delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.relation-table .update-button {
+    background-color: #007bff;
+    color: white;
+    margin-left: 5px;
+}
+
+.relation-table .delete-button:hover {
+    background-color: #c82333;
+}
+
+.relation-table .update-button:hover {
+    background-color: #0056b3;
+}
+
+.close-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+    background-color: #c82333;
+}
