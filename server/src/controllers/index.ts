@@ -1,7 +1,0 @@
-/*
-controller files:
-
- userController
- adminController
-
-*/

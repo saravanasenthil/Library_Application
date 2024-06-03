@@ -1,9 +1,8 @@
 import { DataSource } from "typeorm";
-import { User} from "./models/userTable"
+import { User } from "./models/userTable";
 import { Book } from "./models/bookTable";
-import{UserBook} from "./models/userBookTable"
+import { UserBook } from "./models/userBookTable";
 import path from "path";
-// import { config } from "dotenv";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -24,7 +23,6 @@ export const checkConnection = async () => {
     await AppDataSource.initialize();
     console.log("db connected successfully");
   } catch (error) {
-    
-    console.log("cannot connect to db",error);
+    console.log("cannot connect to db", error);
   }
 };

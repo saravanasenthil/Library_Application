@@ -9,10 +9,8 @@ interface BookDetailsModalProps {
   book: {
     ID: number;
     bookname: string;
-    
   };
   onBorrow: () => void;
-  
 }
 
 const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
@@ -20,33 +18,34 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
   onRequestClose,
   book,
   onBorrow,
-  
 }) => {
   const [isBorrowed, setIsBorrowed] = useState(false);
   const [username, setusername] = useState("");
   const [bookname, setbookname] = useState("");
   const [startdate, setstartdate] = useState("");
   const [enddate, setenddate] = useState("");
-  
-
-  
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      
-      const response = await axios.post(
-        "http://localhost:9002/user/borrow",{
-        username, bookname, startdate, enddate
-      },
-       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
 
-      console.log(response)
+      const response = await axios.post(
+        "http://localhost:9002/user/borrow",
+        {
+          username,
+          bookname,
+          startdate,
+          enddate,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response);
       console.log("Data posted successfully");
     } catch (error) {
       console.error("Error borrow book:", error);
@@ -65,9 +64,8 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
     >
       <h2>{book.bookname}</h2>
 
-      
-      <form onSubmit={handleSubmit} >
-      <div className="form-group">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
           <input
             type="text"
             className="form-control"
@@ -76,7 +74,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
             onChange={(e) => setusername(e.target.value)}
           />
         </div>
-      <div className="form-group">
+        <div className="form-group">
           <input
             type="text"
             className="form-control"
@@ -110,11 +108,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
           <p className="success-message">Borrow successful!</p>
         ) : (
           <>
-            <button
-              type="submit"
-              className="borrow-button"
-              
-            >
+            <button type="submit" className="borrow-button">
               Borrow
             </button>
             <button className="close-button" onClick={onRequestClose}>

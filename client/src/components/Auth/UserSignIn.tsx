@@ -4,44 +4,45 @@ import { useNavigate } from "react-router-dom";
 import "../Style/UserSignIn.css";
 import { Navbar } from "../Navbar/Navbar";
 
-import axios from 'axios';
+import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-interface DecodedToken{
-  id:string,
-  role:string
+interface DecodedToken {
+  id: string;
+  role: string;
 }
 
 const UserSignIn: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
- 
+
   const navigate = useNavigate();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
-      const response = await axios.post('http://localhost:9002/user/signin', { username, password });
-      // const { token, role } = response.data;
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('role', role);
+      const response = await axios.post("http://localhost:9002/user/signin", {
+        username,
+        password,
+      });
+
       const data = response.data;
-      const token = data.token
-      localStorage.setItem('token', token);
+      const token = data.token;
+      localStorage.setItem("token", token);
 
       const decodedToken = jwtDecode<DecodedToken>(token);
       const role = decodedToken.role;
-      
-      if (role === 'admin') {
-        navigate('/admin-dashboard');
+
+      if (role === "admin") {
+        navigate("/admin-dashboard");
       } else {
-        navigate('/user-dashboard');
+        navigate("/user-dashboard");
       }
     } catch (error) {
-      console.error('Error during signin:', error);
+      console.error("Error during signin:", error);
     }
-};
+  };
 
   const handleSignUpClick = () => {
     navigate("/signup");
@@ -71,7 +72,6 @@ const UserSignIn: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          
 
           <button
             type="button"
@@ -80,7 +80,6 @@ const UserSignIn: React.FC = () => {
           >
             Submit
           </button>
-          {/* {error && <p className="error">{error}</p>} */}
         </form>
 
         <p>

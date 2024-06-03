@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../Style/BookTable.css";
-// import axios from '../Auth/ApiService';
-// import axiosInstance from "../Auth/ApiService";
 import axios from "axios";
 
 interface Book {
@@ -16,14 +14,13 @@ interface AllBooksCardProps {
 }
 
 const AllBooksCard: React.FC<AllBooksCardProps> = ({ onRequestClose }) => {
-//   const [bookname, setBookname] = useState<Book[]>([]);
   const [newBookName, setNewBookName] = useState("");
   const [book, setBook] = useState<Book[]>([]);
 
   const fetchBooks = async () => {
     try {
       const token = localStorage.getItem("token");
-      
+
       const response = await axios.get("http://localhost:9002/admin/show", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -40,43 +37,35 @@ const AllBooksCard: React.FC<AllBooksCardProps> = ({ onRequestClose }) => {
     fetchBooks();
   }, []);
 
-
-
   const handleAddBook = () => {
     const newBook = {
-        bookname: newBookName,
+      bookname: newBookName,
     };
-    const token = localStorage.getItem('token');
-    axios.post(
-        'http://localhost:9002/admin/createBook',
-        newBook,
-        {
-            headers: { Authorization: `Bearer ${token}` }
-        }
-    )
-    .then((response) => {
+    const token = localStorage.getItem("token");
+    axios
+      .post("http://localhost:9002/admin/createBook", newBook, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
         setBook([...book, response.data]);
-        setNewBookName(''); 
-    })
-    .catch((error) => console.error('Error adding book:', error));
-};
+        setNewBookName("");
+      })
+      .catch((error) => console.error("Error adding book:", error));
+  };
 
-  
-
-const handleDeleteBook = async (id: number) => {
+  const handleDeleteBook = async (id: number) => {
     try {
-        const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:9002/admin/deleteBook/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        setBook(book.filter((book) => book.ID !== id));
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:9002/admin/deleteBook/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setBook(book.filter((book) => book.ID !== id));
     } catch (error) {
-        console.error("Error deleting book:", error);
+      console.error("Error deleting book:", error);
     }
-};
-
+  };
 
   return (
     <Modal

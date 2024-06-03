@@ -7,7 +7,7 @@
   margin-left: 7px;
 }
 
-.signup-container p{
+.signup-container p {
   margin-left: 57px;
 }
 
@@ -26,13 +26,11 @@
   margin-top: 150px;
 }
 
-.signup-container h2{
+.signup-container h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
 }
-
-
 
 .signup-container form label {
   margin-bottom: 10px;
@@ -47,9 +45,8 @@
   border-radius: 5px;
   font-size: 16px;
   gap: 10px;
-  margin-left:80px;
+  margin-left: 80px;
 }
-
 
 .signup-container form button {
   padding: 10px;
@@ -64,9 +61,6 @@
 }
 
 .signup-container form p {
- 
-  
-  
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -78,4 +72,3 @@
 .signup-container form button:hover {
   background-color: #555;
 }
-

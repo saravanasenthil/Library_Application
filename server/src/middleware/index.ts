@@ -1,7 +1,0 @@
-/*
-middleware files
-
-    authMiddleware
-    adminMiddleware
-
-*/

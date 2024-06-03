@@ -4,27 +4,24 @@ import { useNavigate } from "react-router-dom";
 import "../Style/UserSignUp.css";
 import { Navbar } from "../Navbar/Navbar";
 
-import axios from 'axios';
-
+import axios from "axios";
 
 const UserSignUp: React.FC = () => {
-  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
- 
-  const navigate = useNavigate();
-  ;
 
+  const navigate = useNavigate();
   const handleSignUpClick = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:9002/user/signup', { username, password });
-      console.log('user register success',response.data)
-      navigate("/signin")
-
-      
+      const response = await axios.post("http://localhost:9002/user/signup", {
+        username,
+        password,
+      });
+      console.log("user register success", response.data);
+      navigate("/signin");
     } catch (error) {
-      console.error('Error during signup:', error);
+      console.error("Error during signup:", error);
     }
   };
 
@@ -64,7 +61,6 @@ const UserSignUp: React.FC = () => {
           >
             Submit
           </button>
-          {/* {error && <p className="error">{error}</p>} */}
         </form>
         <p>
           Are you Already have an account?

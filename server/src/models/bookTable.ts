@@ -12,4 +12,3 @@ export class Book {
   @OneToMany(() => UserBook, (userBook) => userBook.bookname)
   userBooks: UserBook[];
 }
-  

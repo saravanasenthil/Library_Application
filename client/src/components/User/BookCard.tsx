@@ -6,7 +6,6 @@ import "../Style/BookCard.css";
 type Book = {
   ID: number;
   bookname: string;
-  
 };
 
 interface BookCardProps {
@@ -15,8 +14,6 @@ interface BookCardProps {
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -27,7 +24,6 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
   };
 
   const handleBorrow = () => {
-    
     console.log(`Borrowed ${book.bookname}`);
     setIsModalOpen(false);
   };
@@ -42,7 +38,6 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         onRequestClose={handleCloseModal}
         book={book}
         onBorrow={handleBorrow}
-        
       />
     </>
   );
