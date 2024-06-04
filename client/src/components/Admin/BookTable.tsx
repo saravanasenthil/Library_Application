@@ -21,7 +21,7 @@ const AllBooksCard: React.FC<AllBooksCardProps> = ({ onRequestClose }) => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get("http://localhost:9002/admin/show", {
+      const response = await axios.get("http://localhost:9006/admin/show", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +43,7 @@ const AllBooksCard: React.FC<AllBooksCardProps> = ({ onRequestClose }) => {
     };
     const token = localStorage.getItem("token");
     axios
-      .post("http://localhost:9002/admin/createBook", newBook, {
+      .post("http://localhost:9006/admin/createBook", newBook, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -56,7 +56,7 @@ const AllBooksCard: React.FC<AllBooksCardProps> = ({ onRequestClose }) => {
   const handleDeleteBook = async (id: number) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:9002/admin/deleteBook/${id}`, {
+      await axios.delete(`http://localhost:9006/admin/deleteBook/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

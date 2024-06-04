@@ -20,10 +20,10 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
   onBorrow,
 }) => {
   const [isBorrowed, setIsBorrowed] = useState(false);
-  const [username, setusername] = useState("");
-  const [bookname, setbookname] = useState("");
-  const [startdate, setstartdate] = useState("");
-  const [enddate, setenddate] = useState("");
+  const [username, setUsername] = useState("");
+  const [bookname, setBookname] = useState("");
+  const [startdate, setStartdate] = useState("");
+  const [enddate, setEnddate] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,7 +31,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        "http://localhost:9002/user/borrow",
+        "http://localhost:9006/user/borrow",
         {
           username,
           bookname,
@@ -45,10 +45,10 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
         }
       );
 
-      console.log(response);
+      console.log(response.data);
       console.log("Data posted successfully");
     } catch (error) {
-      console.error("Error borrow book:", error);
+      console.error("Error borrowing book:", error);
     }
     onBorrow();
     setIsBorrowed(true);
@@ -71,7 +71,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
             className="form-control"
             placeholder="Enter the username"
             value={username}
-            onChange={(e) => setusername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -80,7 +80,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
             className="form-control"
             placeholder="Enter the bookname"
             value={bookname}
-            onChange={(e) => setbookname(e.target.value)}
+            onChange={(e) => setBookname(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -89,7 +89,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
             className="form-control"
             placeholder="Enter Start date"
             value={startdate}
-            onChange={(e) => setstartdate(e.target.value)}
+            onChange={(e) => setStartdate(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -98,23 +98,22 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
             placeholder="Enter End date"
             className="form-control"
             value={enddate}
-            onChange={(e) => setenddate(e.target.value)}
+            onChange={(e) => setEnddate(e.target.value)}
           />
         </div>
+        <div className="button-container">
+          <button type="submit" className="borrow-button">
+            Borrow
+          </button>
+        </div>
       </form>
-      <div className="form-group"></div>
       <div className="button-container">
         {isBorrowed ? (
           <p className="success-message">Borrow successful!</p>
         ) : (
-          <>
-            <button type="submit" className="borrow-button">
-              Borrow
-            </button>
-            <button className="close-button" onClick={onRequestClose}>
-              Close
-            </button>
-          </>
+          <button className="close-button" onClick={onRequestClose}>
+            Close
+          </button>
         )}
       </div>
     </Modal>

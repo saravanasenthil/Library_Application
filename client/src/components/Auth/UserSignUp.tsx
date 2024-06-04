@@ -14,12 +14,13 @@ const UserSignUp: React.FC = () => {
   const handleSignUpClick = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:9002/user/signup", {
+      const response = await axios.post("http://localhost:9006/user/signup", {
         username,
         password,
       });
       console.log("user register success", response.data);
       navigate("/signin");
+      alert('signup succeussfull')
     } catch (error) {
       console.error("Error during signup:", error);
     }

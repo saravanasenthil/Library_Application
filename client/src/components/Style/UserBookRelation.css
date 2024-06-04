@@ -7,7 +7,7 @@
   padding: 20px;
   border-radius: 10px;
   outline: none;
-  width: 90%;
+  width: 100%;
   max-width: 600px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   z-index: 1000;
@@ -38,7 +38,10 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-left: 5px;
+  margin-left: 0px;
+  
+  
+ 
 }
 
 .relation-table button:hover {
@@ -50,11 +53,14 @@
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
+  
 }
 
 .relation-table th {
   background-color: #f0f0f0;
+  
 }
+
 
 .relation-table button {
   padding: 5px 10px;
@@ -70,10 +76,10 @@
   color: white;
 }
 
-.relation-table .update-button {
+.relation-table .update-btn {
   background-color: #007bff;
   color: white;
-  margin-left: 5px;
+  margin-top: 3px;
 }
 
 .relation-table .delete-button:hover {
@@ -98,4 +104,9 @@
 
 .close-button:hover {
   background-color: #c82333;
+}
+
+
+.update-btn{
+  margin-left: 15px;
 }

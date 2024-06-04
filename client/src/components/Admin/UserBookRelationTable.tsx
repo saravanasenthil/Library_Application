@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../Style/UserBookRelation.css";
 import axios from "axios";
 
 interface UserBookRelation {
   UBID: number;
-  usernameId: number;
-  booknameId: number;
-  endDate: string;
-  startDate: string;
+  username: {
+    ID: number;
+    username: string;
+  };
+  bookname: {
+    ID: number;
+    bookname: string;
+  };
+  enddate: string;
+  startdate: string;
 }
 
 interface UserBookRelationCardProps {
@@ -20,33 +26,72 @@ const UserBookRelationCard: React.FC<UserBookRelationCardProps> = ({
   onRequestClose,
 }) => {
   const [relations, setRelations] = useState<UserBookRelation[]>([]);
+  const [UBID, setUBID] = useState<UserBookRelation[]>([]);
+  const [username, setusernameID] = useState<UserBookRelation[]>([]);
+  const [bookname, setbooknameID] = useState<UserBookRelation[]>([]);
+  const [enddate, setenddate] = useState<UserBookRelation[]>([]);
+  const [startdate, setstartdate] = useState<UserBookRelation[]>([]);
 
-  const handleDeleteRelation = (userId: number, bookId: number) => {
-    axios
-      .delete(`http://localhost:9002/admin//deleteUB/${userId}`)
-      .then(() => {
-        setRelations(
-          relations.filter(
-            (rel) => !(rel.usernameId === userId && rel.booknameId === bookId)
-          )
-        );
-      })
-      .catch((error) => console.error("Error deleting relation:", error));
+  const fetchBooks = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.get(
+        "http://localhost:9006/admin/userbooks",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+
+      setUBID(response.data);
+      setusernameID(response.data);
+      setbooknameID(response.data);
+      setenddate(response.data);
+      setstartdate(response.data);
+    } catch (error) {
+      console.error("Error fetching book details:", error);
+    }
   };
 
-  const handleUpdateEndDate = (
-    usernameId: number,
-    booknameId: number,
-    newEndDate: string
-  ) => {
-    setRelations(
-      relations.map((rel) =>
-        rel.usernameId === usernameId && rel.booknameId === booknameId
-          ? { ...rel, endDate: newEndDate }
-          : rel
-      )
-    );
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const handleDeleteRelation = async (UBID: any) => {
+    axios;
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:9006/admin/deleteUB/${UBID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUBID(UBID.filter((UBID: any) => UBID !== UBID));
+    } catch (error) {
+      console.error("Error deleting book:", error);
+    }
   };
+  const handleUpdateDates = async (UBID: number, newStartDate: string, newEndDate: string) => {
+    try {
+        const token = localStorage.getItem('token');
+        await axios.put(`http://localhost:9006/admin/updateUB/${UBID}`, { startDate: newStartDate, endDate: newEndDate }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        const updatedRelations = [...relations];
+        const index = updatedRelations.findIndex(relation => relation.UBID === UBID);
+        if (index !== -1) {
+            updatedRelations[index] = { ...updatedRelations[index], startdate: newStartDate, enddate: newEndDate };
+            setRelations(updatedRelations);
+        }
+    } catch (error) {
+        console.error('Error updating relation:', error);
+    }
+};
 
   return (
     <Modal
@@ -60,39 +105,36 @@ const UserBookRelationCard: React.FC<UserBookRelationCardProps> = ({
       <table className="relation-table">
         <thead>
           <tr>
-            <th>UsernameID</th>
-            <th>BookbookID</th>
+            <th>UBID</th>
+            <th>Username</th>
+            <th>Bookname</th>
             <th>Start Date</th>
             <th>End Date</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {relations.map((rel) => (
-            <tr key={`${rel.usernameId}-${rel.booknameId}`}>
-              <td>{rel.usernameId}</td>
-              <td>{rel.booknameId}</td>
-              <td>{rel.startDate}</td>
-              <td>{rel.endDate}</td>
+          {UBID.map((UBID) => (
+            <tr
+              key={`${UBID.UBID},
+            // ${username},${bookname},${startdate},${enddate}`}
+            >
+              <td>{UBID.UBID}</td>
+              <td>{UBID.username.username}</td>
+              <td>{UBID.bookname.bookname}</td>
+              <td>{UBID.startdate}</td>
+              <td>{UBID.enddate}</td>
               <td>
-                <button
-                  onClick={() =>
-                    handleDeleteRelation(rel.usernameId, rel.booknameId)
-                  }
-                >
-                  Delete
-                </button>
-                <button
-                  onClick={() =>
-                    handleUpdateEndDate(
-                      rel.usernameId,
-                      rel.booknameId,
-                      prompt("Enter new end date:", rel.endDate) || rel.endDate
-                    )
-                  }
-                >
-                  Update
-                </button>
+                
+                <button className="delete-btn" onClick={() => handleDeleteRelation(UBID.UBID)}>Delete</button>
+                
+                                <button className="update-btn" onClick={() => {
+                                    const newStartDate = prompt('Enter new start date:', UBID.startdate);
+                                    const newEndDate = prompt('Enter new end date:', UBID.enddate);
+                                    if (newStartDate && newEndDate) {
+                                        handleUpdateDates(UBID.UBID, newStartDate, newEndDate);
+                                    }
+                                }}>Update</button>
               </td>
             </tr>
           ))}

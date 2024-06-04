@@ -6,8 +6,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   if (!token) {
     return <Navigate to="/signin" />;
   }
-
-  return children;
+   return children;
 };
 
 export default ProtectedRoute;

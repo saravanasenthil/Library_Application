@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../Style/UsersTable.css";
-
-import axiosInstance from "../Auth/ApiService";
+import axiosInstance from "../Api/ApiService";
 
 interface AllUsersCardProps {
   onRequestClose: () => void;

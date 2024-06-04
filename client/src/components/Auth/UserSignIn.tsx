@@ -22,7 +22,7 @@ const UserSignIn: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:9002/user/signin", {
+      const response = await axios.post("http://localhost:9006/user/signin", {
         username,
         password,
       });
@@ -33,15 +33,17 @@ const UserSignIn: React.FC = () => {
 
       const decodedToken = jwtDecode<DecodedToken>(token);
       const role = decodedToken.role;
-
+       
       if (role === "admin") {
         navigate("/admin-dashboard");
       } else {
         navigate("/user-dashboard");
       }
+      
     } catch (error) {
       console.error("Error during signin:", error);
     }
+    alert('signin succeussfull')
   };
 
   const handleSignUpClick = () => {

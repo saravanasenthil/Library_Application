@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./components/Home/HomePage";
 import UserSignIn from "./components/Auth/UserSignIn";
 import UserSignUp from "./components/Auth/UserSignUp";
-import "./App.css";
 import UserDashboard from "./components/User/UserDashboard ";
 import MyBooks from "./components/User/MyBooks";
 import AdminDashboard from "./components/Admin/AdminDashboard";
-import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import ProtectedRoute from "./components/Api/ProtectedRoute";
+import "./App.css";
 
 const App: React.FC = () => {
   return (

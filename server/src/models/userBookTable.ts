@@ -16,7 +16,7 @@ export class UserBook extends BaseEntity {
   @ManyToOne(() => User, (user) => user.userBooks)
   username: User;
 
-  @ManyToOne(() => Book, (book) => book.userBooks)
+  @ManyToOne(() => Book, (book) => book.userBooks,{onDelete : 'CASCADE'})
   bookname: Book;
 
   @Column()

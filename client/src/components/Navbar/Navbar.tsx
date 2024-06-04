@@ -3,14 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../Style/Navbar.css";
 import navbarIcon from "../../assets/download__1_-removebg-preview.png";
+import useAuth from "./logout";
+
 
 interface NavbarProps {
   isUsersignIn: boolean;
   isAdmin: boolean;
 }
 
+
 export const Navbar: React.FC<NavbarProps> = ({ isUsersignIn, isAdmin }) => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleUserClick = () => {
     navigate("/signin");
@@ -23,9 +27,9 @@ export const Navbar: React.FC<NavbarProps> = ({ isUsersignIn, isAdmin }) => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/">
+        
           <img src={navbarIcon} width="70" height="20" alt="sf" />
-        </Link>
+        
       </div>
       <div className="navbar-buttons">
         <div className="navbar-buttons">
@@ -36,9 +40,9 @@ export const Navbar: React.FC<NavbarProps> = ({ isUsersignIn, isAdmin }) => {
                   <Link to="/my-books">My Books</Link>
                 </button>
               </Link>
-              <Link to="/">
-                <button className="navbar-button">Logout</button>
-              </Link>
+              
+                <button className="navbar-button" onClick={logout}>Logout</button>
+              
             </>
           ) : (
             <button className="navbar-button" onClick={handleUserClick}>

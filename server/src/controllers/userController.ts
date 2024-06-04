@@ -121,7 +121,7 @@ export const borrowBook = async (req: Request, res: Response) => {
       enddate: enddate,
     });
     await userBookRepository.save(newUserBook);
-    return res.status(201).json({ message: "Book borrowed successfully" });
+    return res.status(201).json({ message: "Book borrowed successfully" ,newUserBook});
   } catch (error) {
     console.error("Error borrowing book:", error);
     return res.status(500).json({ message: "Internal server error" });
@@ -132,7 +132,7 @@ export const viewBorrowedBooks = async (req: Request, res: Response) => {
   try {
     const userBookRepository = AppDataSource.getRepository(UserBook);
     const userBooks = await userBookRepository.find({
-      relations: ["user", "book"],
+      relations: ["username", "bookname"],
     });
 
     return res.status(201).json(userBooks);
